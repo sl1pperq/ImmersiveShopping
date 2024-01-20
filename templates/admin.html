@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" type="text/css"
+          rel="stylesheet">
+    <style>
+        #navBar {
+            background-color: cornflowerblue
+        }
+
+        #navBarText {
+            color: white
+        }
+
+        #but1 {
+            background-color: darkslateblue;
+            color: white;
+        }
+
+        #but2 {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+            color: cornflowerblue;
+        }
+
+        .icon-square {
+            width: 3rem;
+            height: 3rem;
+            border-radius: .75rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <nav class="navbar fixed-top" id="navBar">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/" id="navBarText">
+                        Магазин Активного Ученика и Иммерсивных Технологий
+                    </a>
+                </div>
+            </nav>
+
+            <h1 style="visibility: collapse">Иммерсивные технологии</h1>
+
+            <div class="d-grid gap-2">
+                <a href="/admin/123456/create" class="btn btn-primary mt-3" type="button">Создать товар</a>
+            </div>
+
+            <div class="row g-3 mt-3 mb-3">
+                {% for order in orders %}
+                    <div class="card">
+                        <div class="card-header">
+                            №{{ order.id }}
+                            <span class="badge rounded-pill text-bg-primary">{{ order.status }}</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ order.item }}</h5>
+                            <p class="card-text">
+                                Место получения: {{ order.info.school }}
+                            </p>
+                            <h5 class="card-title">{{ order.price }} КК</h5>
+                            <form method="post" action="/admin/123456/change/{{ order.id }}" class="row g-3">
+                                <div class="col-md-6">
+                                    <select name="new_stat" class="form-select" aria-label="Default select example">
+                                        <option>В обработке</option>
+                                        <option>В сборке</option>
+                                        <option>Ожидает получения</option>
+                                        <option>Получен</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary">
+                                        Изменить
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="row g-3 mt-3 mb-3">
+                {% for item in items %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img src="{{ item.image }}" class="card-img-top">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ item.title }}</h6>
+                                <h4 class="card-title">{{ item.price }} КК</h4>
+                                <p class="card-text">
+                                    {{ item.text }}
+                                </p>
+                                <a href="/admin/123456/del/item/{{ item.id }}" class="btn btn-danger">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <div id="radiobells_container"><a href="https://www.radiobells.com/" id="RP_link">Онлайн радио</a>
+                #radiobells_script_hash
+            </div>
+            <link href="https://www.radiobells.com/script/style.css" type="text/css" rel="stylesheet"/>
+            <script type="text/javascript">var rad_backcolor = "#434242";
+            var rad_logo = "black";
+            var rad_autoplay = false;
+            var rad_width = "responsive";
+            var rad_width_px = 330;
+            var rad_stations = [['https://listen7.myradio24.com/75853', 'Шансон Радио', 'shansonradio']];</script>
+            <script type="text/javascript" src="https://www.radiobells.com/script/v2_1.js" charset="UTF-8"></script>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
